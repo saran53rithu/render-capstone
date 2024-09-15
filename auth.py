@@ -5,10 +5,11 @@ from functools import wraps
 from jose import jwt, jwk
 from urllib.request import urlopen
 
-JWKS_URL = 'https://dev-80n7ot50j6bt430j.us.auth0.com/.well-known/jwks.json'
-AUTH0_DOMAIN = 'dev-80n7ot50j6bt430j.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'render'
+# pass these variables in render app while creating web service
+JWKS_URL = os.environ['JWKS_URL']
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
 ## AuthError Exception
 '''
