@@ -31,10 +31,23 @@ Run the app - flask run --reload
 Test the application after generating valid token with required permissions from auth0 and run - pytest test-app.py
 
 There are two roles associated with this project
-1. Restaurant owner
+1. Restaurant owner 
+        get:restaurants-detail
+        get:menu-detail
+        post:restaurants-detail
+        post:menu-detail
+        update:restaurants-detail
+        delete:restaurants-detail
 3. Restaurant worker
+        get:restaurants-detail
+        get:menu-detail
+        post:menu-detail
 
 Restaurant owner has all access whereas restaurant worker can only view restaurant details, menu details and add new menu
+
+### Render details
+
+This applications is hosted in render url - https://render-capstone-1.onrender.com/
 
 ### API Endpoints:
 
@@ -50,20 +63,124 @@ Menu Endpoints:
 GET /menus: Lists all menu items.
 POST /add-menu: Adds a new menu item.
 
-GET '/restaurants'
-Fetches the list of restaurants
-Request Arguments: None
-Returns: An object with a single key, categories, that contains an object of id: category_string key:value pairs.
-Example: curl http://localhost:5000/categories
 
+1. GET /restaurants
+Description: Fetches the list of all restaurants.
+Request Arguments: None
+Returns: A JSON array of restaurant objects, each with id, name, address, phone_number, and email.
+Example:
+
+```json
+[
+    {
+        "address": "123 Pasta St",
+        "email": "contact@italianbistro.com",
+        "id": 1,
+        "name": "Italian Bistro",
+        "phone_number": "555-1234"
+    },
+    {
+        "address": "456 Sushi Ave",
+        "email": "info@sushihaven.com",
+        "id": 2,
+        "name": "Sushi Haven",
+        "phone_number": "555-5678"
+    }
+]
+
+
+2. GET /menu
+Description: Fetches the list of all menu items.
+Request Arguments: None
+Returns: A JSON array of menu items, each with id, name, price, description, available, and restaurant_id.
+Example:
+
+```json
+[
+    {
+        "available": true,
+        "description": "Classic Italian pasta with cream and bacon",
+        "id": 1,
+        "name": "Spaghetti Carbonara",
+        "price": "12.99",
+        "restaurant_id": 1
+    },
+    {
+        "available": true,
+        "description": "Simple pizza with tomato, mozzarella, and basil",
+        "id": 2,
+        "name": "Margherita Pizza",
+        "price": "9.99",
+        "restaurant_id": 1
+    }
+]
+
+3. POST /add-restaurant
+Description: Adds a new restaurant to the database.
+Request Arguments: JSON object with name, address, phone_number, and email.
+
+```json
 {
-  "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
-    "6": "Sports"
-  }, 
-  "success": true
+    "name": "New Restaurant",
+    "address": "789 New Place",
+    "phone_number": "555-0000",
+    "email": "contact@newrestaurant.com"
 }
+
+4. POST /add-menu
+Description: Adds a new menu item to the database.
+Request Arguments: JSON object with name, price, description, available, and restaurant_id.
+Example:
+
+```json
+{
+    "name": "Cake",
+    "price": "1000",
+    "description": "strawberry",
+    "available": "yes",
+    "restaurant_id": "1"
+}
+
+5. PATCH /restaurants/<int:restaurant_id>
+Description: Updates the details of an existing restaurant.
+Request Arguments: JSON object with any of the fields name, address, phone_number, or email to update.
+Example:
+
+```json
+{
+        "address": "123 Pasta St",
+        "email": "contact@italianbistro.com",
+        "id": 1,
+        "name": "New name modified here",
+        "phone_number": "555-1234"
+}
+
+Error Response if restaurant id is not found:
+
+```json
+{
+    "success": False,
+    "error": "Restaurant not found"
+}
+
+
+6. DELETE /restaurants/<int:restaurant_id>
+Description: Deletes a restaurant from the database.
+Request Arguments: None
+Returns: A JSON object indicating success and a message.
+Example:
+
+```json
+{
+    "success": True,
+    "message": "Restaurant deleted successfully"
+}
+
+Error Response if restaurant id is not found:
+
+```json
+{
+    "success": False,
+    "error": "Restaurant not found"
+}
+
