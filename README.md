@@ -87,7 +87,7 @@ Example:
         "phone_number": "555-5678"
     }
 ]
-
+```
 
 2. GET /menu
 Description: Fetches the list of all menu items.
@@ -114,6 +114,7 @@ Example:
         "restaurant_id": 1
     }
 ]
+```
 
 3. POST /add-restaurant
 Description: Adds a new restaurant to the database.
@@ -126,6 +127,7 @@ Request Arguments: JSON object with name, address, phone_number, and email.
     "phone_number": "555-0000",
     "email": "contact@newrestaurant.com"
 }
+```
 
 4. POST /add-menu
 Description: Adds a new menu item to the database.
@@ -140,6 +142,7 @@ Example:
     "available": "yes",
     "restaurant_id": "1"
 }
+```
 
 5. PATCH /restaurants/<int:restaurant_id>
 Description: Updates the details of an existing restaurant.
@@ -154,6 +157,7 @@ Example:
         "name": "New name modified here",
         "phone_number": "555-1234"
 }
+```
 
 Error Response if restaurant id is not found:
 
@@ -162,6 +166,7 @@ Error Response if restaurant id is not found:
     "success": False,
     "error": "Restaurant not found"
 }
+```
 
 
 6. DELETE /restaurants/<int:restaurant_id>
@@ -175,6 +180,7 @@ Example:
     "success": True,
     "message": "Restaurant deleted successfully"
 }
+```
 
 Error Response if restaurant id is not found:
 
@@ -183,4 +189,5 @@ Error Response if restaurant id is not found:
     "success": False,
     "error": "Restaurant not found"
 }
+```
 
