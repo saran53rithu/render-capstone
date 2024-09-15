@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Text, Numeric, Bo
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # Database URL (replace with your actual credentials)
 database_path = os.environ['DATABASE_URL']
