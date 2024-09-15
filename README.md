@@ -1,6 +1,6 @@
 # CAPSTONE PROJECT - RENDER APP
 
-## Restaurant Management System Application
+## Restaurant Management System
 
 The Restaurant Management System is a web application designed to manage and display restaurant and menu details. It provides endpoints for adding, updating, and deleting restaurants and menu items, as well as retrieving information about them. The system is built using Flask, a popular Python web framework, and uses SQLAlchemy for database interactions.
 
@@ -119,6 +119,7 @@ Example:
 3. POST /add-restaurant
 Description: Adds a new restaurant to the database.
 Request Arguments: JSON object with name, address, phone_number, and email.
+Example:
 
 ```json
 {
@@ -128,7 +129,13 @@ Request Arguments: JSON object with name, address, phone_number, and email.
     "email": "contact@newrestaurant.com"
 }
 ```
-
+Success response:
+```json
+{
+                    'success': True,
+                    'created': 5
+}
+```
 4. POST /add-menu
 Description: Adds a new menu item to the database.
 Request Arguments: JSON object with name, price, description, available, and restaurant_id.
@@ -143,11 +150,18 @@ Example:
     "restaurant_id": "1"
 }
 ```
+Success response:
+```json
+{
+                    'success': True,
+                    'created': 10
+}
+```
 
 5. PATCH /restaurants/<int:restaurant_id>
 Description: Updates the details of an existing restaurant.
 Request Arguments: JSON object with any of the fields name, address, phone_number, or email to update.
-Example:
+Example: /restaurants/1
 
 ```json
 {
