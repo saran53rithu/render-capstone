@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request
 from models import db, Restaurant, Menu
 from flask_cors import CORS
-from auth.auth import AuthError, requires_auth
+from auth import AuthError, requires_auth
 
 # Initialize Flask app
 app = Flask(__name__)
