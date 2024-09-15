@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request
 from models import db, Restaurant, Menu, setup_db
 from flask_cors import CORS
-from auth.auth import AuthError, requires_auth
+from auth import AuthError, requires_auth
 
 # referenced from https://learn.udacity.com/nanodegrees/nd0044/parts/cd0037/lessons/9e4f7f45-c341-456c-aa37-ce4d675acd9d/concepts/001a705d-06f9-472b-b2e8-b8d00e8e0372?lesson_tab=lesson
 
