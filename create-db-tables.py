@@ -4,10 +4,10 @@ from sqlalchemy.orm import relationship, sessionmaker
 from flask_sqlalchemy import SQLAlchemy
 
 # Database URL (replace with your actual credentials)
-DATABASE_URL = "postgresql://postgres:password@localhost:5432/postgres"
+database_path = os.environ['DATABASE_URL']
 
 # Create a new SQLAlchemy engine instance
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(database_path, echo=True)
 
 # Base class for declarative models
 Base = declarative_base()
