@@ -1,4 +1,4 @@
-# CAPSTONE PROJECT - RENDER APP
+# CAPSTONE PROJECT - RENDER HOSTED
 
 ## Restaurant Management System
 
