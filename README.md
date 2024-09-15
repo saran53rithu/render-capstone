@@ -143,11 +143,11 @@ Example:
 
 ```json
 {
-    "name": "Cake",
-    "price": "1000",
-    "description": "strawberry",
-    "available": "yes",
-    "restaurant_id": "1"
+    "name": "Cheeseburger",
+    "price": 10,
+    "description": "A delicious cheeseburger with lettuce, tomato, and cheese.",
+    "available": true,
+    "restaurant_id": 1
 }
 ```
 Success response:
