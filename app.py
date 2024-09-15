@@ -105,9 +105,7 @@ def create_app():
         restaurants = Restaurant.query.all()
 
         try:
-            restaurant = Restaurant(name=new_name, address=new_address, phone_number=new_phone_number, email=new_email)
-            db.session.add(restaurant)
-            db.session.commit()
+            restaurant = Restaurant.insert(new_name, new_address, new_phone_number, new_email)
 
             return jsonify(
                 {
@@ -150,9 +148,7 @@ def create_app():
                     "success": False,
                     "error": "Restaurant with the given ID does not exist"
                 }), 404
-            menu = Menu(name=new_name, price=new_price, description=new_description, available=new_available, restaurant_id=new_restaurant_id)
-            db.session.add(menu)
-            db.session.commit()
+            menu = Menu.insert(new_name, new_price, new_description, new_available, new_restaurant_id)
 
             return jsonify(
                 {
@@ -173,45 +169,29 @@ def create_app():
     @requires_auth('update:restaurants-detail')
     def update_restaurant(payload, restaurant_id):
 
-        restaurant = Restaurant.query.get(restaurant_id)
-        if restaurant is None:
+        body = request.get_json()
+        updated_restaurant = Restaurant.update(
+            restaurant_id,
+            name=body.get("name"),
+            address=body.get("address"),
+            phone_number=body.get("phone_number"),
+            email=body.get("email")
+        )
+        if not updated_restaurant:
             return jsonify({
                 "success": False,
                 "error": "Restaurant not found"
             }), 404
 
-        body = request.get_json()
-        new_name = body.get("name", None)
-        new_address = body.get("address", None)
-        new_phone_number = body.get("phone_number", None)
-        new_email = body.get("email", None)
-
-        if 'name' in body:
-            restaurant.name = body['name']
-        if 'address' in body:
-            restaurant.address = body['address']
-        if 'phone_number' in body:
-            restaurant.phone_number = body['phone_number']
-        if 'email' in body:
-            restaurant.email = body['email']
-
-        try:
-            db.session.commit()
-            return jsonify({
-                'success': True,
-                'id': restaurant.id,
-                'name': restaurant.name,
-                'address': restaurant.address,
-                'phone_number': restaurant.phone_number,
-                'email': restaurant.email
-            }), 200
-
-        except Exception as e:
-            return jsonify({
-                "success": False,
-                "error": "An error occurred while updating the restaurant details"
-            }), 422
-
+        return jsonify({
+            'success': True,
+            'id': updated_restaurant.id,
+            'name': updated_restaurant.name,
+            'address': updated_restaurant.address,
+            'phone_number': updated_restaurant.phone_number,
+            'email': updated_restaurant.email
+        }), 200
+        
 # referenced from endpoint implementation https://learn.udacity.com/nanodegrees/nd0044/parts/cd0037/lessons/9e4f7f45-c341-456c-aa37-ce4d675acd9d/concepts/c8385f51-3e6b-42be-afdb-419840f2fcaf?lesson_tab=lesson and auth0 reference from https://learn.udacity.com/nanodegrees/nd0044/parts/cd0039/lessons/3bd56b2d-7a3f-4aff-90f8-842eec9071a9/concepts/8c8da3d7-8591-4d70-b570-76e6cda7c8b5?lesson_tab=lesson
 #Also from https://github.com/udacity/cd0037-API-Development-and-Documentation-exercises/blob/master/3_Testing_Review/backend/flaskr/__init__.py
 
@@ -219,16 +199,12 @@ def create_app():
     @requires_auth('delete:restaurants-detail')
     def delete_restaurant(payload, restaurant_id):
         try:
-            restaurant = Restaurant.query.get(restaurant_id)
-            print(restaurant)
-            if not restaurant:
+            deleted_restaurant = Restaurant.delete(restaurant_id)
+            if not deleted_restaurant:
                 return jsonify({
                     "success": False,
                     "error": "Restaurant not found"
                 }), 404
-
-            db.session.delete(restaurant)
-            db.session.commit()
 
             return jsonify({
                 'success': True,
