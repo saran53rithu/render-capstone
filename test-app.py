@@ -1,5 +1,5 @@
 import unittest
-from app import app
+from app import create_app
 from models import db
 import json
 
@@ -12,7 +12,7 @@ class FlaskAppTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up the Flask app and test database."""
-        cls.app = app
+        cls.app = create_app()
         cls.client = cls.app.test_client()
         cls.client.testing = True
         cls.restaurant_owner_header = {'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imtlc2RvaXUwVHdfM2xRMEVrTnNTLSJ9.eyJpc3MiOiJodHRwczovL2Rldi04MG43b3Q1MGo2YnQ0MzBqLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmQ3NGQ3MjIzNjA3OGU0NTNmYjYzYjYiLCJhdWQiOiJyZW5kZXIiLCJpYXQiOjE3MjYzNzEyMzAsImV4cCI6MTcyNjQwMDAzMCwic2NvcGUiOiIiLCJhenAiOiJSTVRybGw4U3BFcVJTTkMxN0JnUWFLMm9wV0p1VmxtcyIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpyZXN0YXVyYW50cy1kZXRhaWwiLCJnZXQ6bWVudS1kZXRhaWwiLCJnZXQ6cmVzdGF1cmFudHMtZGV0YWlsIiwicG9zdDptZW51LWRldGFpbCIsInBvc3Q6cmVzdGF1cmFudHMtZGV0YWlsIiwidXBkYXRlOnJlc3RhdXJhbnRzLWRldGFpbCJdfQ.g7lMT4hzM9pPCNDopfAa-IkGkAtBtUQ_uuerKcrTiR8NIl_W3giGOIZS6Kqft2wmibXVKBtyBnn_FD4LB2rW4nxJYdEpAZcAUhbD2u6Z8U8KHxqS19sCZieXXYITPlo2gyd_iIhyUXk5JOiM_gqjgG12zvDNMqjTMh9FTxKpUys0dZWK-BbGh0FT4i_RuiIX84Oteq0sPAlWk94wfQZOUaQ1sQfYl40yw222ZBtS9ba85Lw4fpCwSOGCCpdImI2GINH20cTddMYlZe843L2eYlmO5nLfKHQrRxboiErUIMiWZ17vE18mqZHelJttaBLVEhTZrSR1USrl-4vWK4d2Lg'}
