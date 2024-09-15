@@ -47,7 +47,7 @@ Restaurant owner has all access whereas restaurant worker can only view restaura
 
 ### Render details
 
-This applications is hosted in render url - [[https://render-capstone-1.onrender.com/](https://restaurant-management-app-h6ur.onrender.com)](https://render-capstone.onrender.com/)
+This applications is hosted in render url - https://render-capstone.onrender.com/
 
 ### API Endpoints:
 
